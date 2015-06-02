@@ -29,17 +29,25 @@ class Game
 	end
 
 	def start_playing
-		while @current_turn < 9 && !@winner
-			board.update(@player_human.get_moves, @player_human.sym)
-			@current_turn += 1
-			board.print_board
-			check_if_win(@player_human)
-			board.update(@player_computer.get_moves, @player_computer.sym)
-			@current_turn += 1
-			board.print_board
-			show_result
-			check_if_win(@player_computer)
+		while @current_turn <= 9 && !@winner
+			take_turns
+
 		end
+	end
+
+	def take_turns
+		if @current_turn %2 == 1 
+			turn(@player_human)
+		else
+			turn(@player_computer)
+		end
+	end
+
+	def turn(player)
+		@board.update(player.get_moves, player.sym)
+		@current_turn += 1
+		@board.print_board
+		check_if_win(player)
 	end
 
 	def show_result
@@ -48,7 +56,7 @@ class Game
 
 	def check_if_win(player)
   	@@win_pattern.each do |pattern|
-  		if pattern.all? {|cell| cell == player.sym}
+  		if pattern.all? {|cell| @board.board[cell] == player.sym}
   			@winner = player
   		end
   	end
