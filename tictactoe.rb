@@ -141,7 +141,7 @@ class Board #creates 3x3 board, user input from 1-9
     @available = Array (0..8)
   end
 
-	def update(move, sym) #update move on the board
+  def update(move, sym) #update move on the board
     if @grid[move] == @empty_cell && move >=0 && move <=8 
       @grid[move] = sym
       @available.delete(move) 
@@ -152,7 +152,7 @@ class Board #creates 3x3 board, user input from 1-9
     end
   end
 
-	def print_board #print board
+  def print_board #print board
     puts "\n"
     @grid.each_slice(3) {|row| puts row.join(' | ')}
     puts "\n"
