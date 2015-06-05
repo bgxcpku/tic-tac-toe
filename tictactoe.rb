@@ -38,20 +38,20 @@ class Game
   end
 
   def play
-  	welcome(@player_1)
-  	welcome(@player_2)
-  	start_playing
-  	show_result
+    welcome(@player_1)
+    welcome(@player_2)
+    start_playing
+    show_result
   end
 
   def welcome(player) 
-  	if player.computer_player == 'N'
-  		puts "Welcome to Tic-Tac-Toe, #{player.name}", "\n"
-  	else
-		  sleep 0.25
-			puts "Our smart computer Potato joins the game!", "\n"
-		end
-	end
+    if player.computer_player == 'N'
+      puts "Welcome to Tic-Tac-Toe, #{player.name}", "\n"
+    else
+    	sleep 0.25
+    	puts "Our smart computer Potato joins the game!", "\n"
+    end
+  end
 
 	def start_playing
 		while @current_turn <= 9 && !@winner #player_1 and player_2 switch turns
