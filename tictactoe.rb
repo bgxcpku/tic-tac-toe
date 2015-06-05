@@ -156,7 +156,7 @@ class Board #creates 3x3 board, user input from 1-9
     puts "\n"
     @grid.each_slice(3) {|row| puts row.join(' | ')}
     puts "\n"
-	end
+  end
 
 end
 
@@ -168,7 +168,7 @@ class Player #create players
     @sym = sym #put either 'o' or 'x' in the cell
     @computer_player = computer_player 
     @all_moves = Array.new # all_moves collects this player's all moves in order for computer to make move
-	end
+  end
 
 	def get_name
     if @computer_player == 'Y'
@@ -176,7 +176,7 @@ class Player #create players
     else
       @name = gets.chomp
     end
-	end
+  end
 
 	def get_moves #to get human player's move 
     puts "Choose your moves from 1 to 9, #{@name}"
@@ -185,7 +185,7 @@ class Player #create players
       all_moves << move #save the move to all moves for this player
     end
     return move  
-	end
+  end
 
 end
 
