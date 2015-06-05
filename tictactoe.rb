@@ -170,7 +170,7 @@ class Player #create players
     @all_moves = Array.new # all_moves collects this player's all moves in order for computer to make move
   end
 
-	def get_name
+  def get_name
     if @computer_player == 'Y'
       @name = 'Potato' #give computer a cute name (my pug's name)
     else
@@ -178,7 +178,7 @@ class Player #create players
     end
   end
 
-	def get_moves #to get human player's move 
+  def get_moves #to get human player's move 
     puts "Choose your moves from 1 to 9, #{@name}"
     move = gets.chomp.to_i - 1
     if move >= 0 && move <=8
