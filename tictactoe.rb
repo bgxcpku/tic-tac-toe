@@ -1,4 +1,5 @@
-##
+## This is the project for Flatiron School interview by Steve Xie
+## It allows either two human or 1 human and 1 computer to play tic tac toe in 3x3 grid
 
 class Game
 	attr_reader :board, :player_1, :player_2
