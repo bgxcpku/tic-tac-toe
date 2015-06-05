@@ -25,8 +25,8 @@ class Game
     puts "Do you want to play with computer? (Y/N)" #user can choose to player with computer (Potato) or another human
     answer = gets.chomp
     while answer != 'Y' && answer != 'N'
-    	puts "Please choose only Y or N", "\n"
-    	answer = gets.chomp
+      puts "Please choose only Y or N", "\n"
+      answer = gets.chomp
     end
     @player_2 = Player.new('o', answer) #create player 2, (human or computer depending on user's choice)
     if answer == 'N'
@@ -48,26 +48,26 @@ class Game
     if player.computer_player == 'N'
       puts "Welcome to Tic-Tac-Toe, #{player.name}", "\n"
     else
-    	sleep 0.25
-    	puts "Our smart computer Potato joins the game!", "\n"
+      sleep 0.25
+      puts "Our smart computer Potato joins the game!", "\n"
     end
   end
 
-	def start_playing
-		while @current_turn <= 9 && !@winner #player_1 and player_2 switch turns
-			take_turns
-		end
-	end
+  def start_playing
+    while @current_turn <= 9 && !@winner #player_1 and player_2 switch turns
+      take_turns
+    end
+  end
 
-	def take_turns
-		if @current_turn %2 == 1 #use the odd or even of @current_turn to check which player's turn it is
-			turn(@player_1)
-		elsif @player_2.computer_player == 'N'
-			turn(@player_2)
-		else
-			smart_computer	#smart_computer makes player_2's move if user choose to play with computer
-		end
-	end
+  def take_turns
+    if @current_turn %2 == 1 #use the odd or even of @current_turn to check which player's turn it is
+      turn(@player_1)
+    elsif @player_2.computer_player == 'N'
+      turn(@player_2)
+    else
+    smart_computer	#smart_computer makes player_2's move if user choose to play with computer
+    end
+  end
 
 	def turn(player) 
 		if @board.update(player.get_moves, player.sym) #get user's move
