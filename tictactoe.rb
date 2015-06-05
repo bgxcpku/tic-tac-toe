@@ -9,14 +9,18 @@ class Game
   	@@half_win_pattern << [a, c]
   	@@half_win_pattern << [b, c]
   end
-  print @@half_win_pattern
 	def initialize
 		@board = Board.new
 		@board.print_board
 		@player_1 = Player.new('x','N')
 		@player_1.get_name
 		puts "Do you want to play with computer? (Y/N)"
-		@player_2 = Player.new('o', gets.chomp)
+		answer = gets.chomp
+		while answer != 'Y' && answer != 'N'
+			puts "Please choose only Y or N", "\n"
+			answer = gets.chomp
+		end
+		@player_2 = Player.new('o', answer)
 		@player_2.get_name
 		@winner = nil
 		@current_turn = 1
@@ -24,14 +28,19 @@ class Game
 
 	
 
-	def welcome 
-		puts "Welcome to Tic-Tac-Toe, #{@player_1.name}"
-		puts "Welcome to Tic-Tac-Toe, #{@player_2.name}"
-
+	def welcome(player) 
+		if player.computer_player == 'N'
+			puts "Welcome to Tic-Tac-Toe, #{player.name}"
+		else
+		  sleep 1
+			puts "Our smart computer Potato joins the game!"
+		end
 	end
 
   def play
-  	welcome
+  	welcome(@player_1)
+  	welcome(@player_2)
+  	sleep 1.5
     start_playing
     show_result
 	end
@@ -59,7 +68,6 @@ class Game
 			puts "You can't choose here"
 		end
 		@board.print_board
-		#puts @board.available
 		check_if_win(player)
 	end
 
@@ -80,7 +88,6 @@ class Game
 	      @@win_pattern.each do |win_pattern| 
 	        if (win_pattern - pattern).length == 1 && ((win_pattern - pattern)&@player_1.all_moves).empty? && ((win_pattern - pattern)&@player_2.all_moves).empty?
 	          move = (win_pattern - pattern)[0]   
-	        	print move    
 	        end
 	      end
 	    end
@@ -100,14 +107,16 @@ class Game
     		move = @board.available.sample
     	end
     end
-    print move
 		@board.update(move, player_2.sym)	
 		@player_2.all_moves << move
 		@player_2.all_moves.sort
 		@current_turn += 1
-		puts "Potato is making his next move"
+		sleep 1
+		puts "Potato is making his next move", "\n"
+		sleep 1
+		puts "Potato picks #{move+1}", "\n"
+		sleep 1
 		@board.print_board
-		#puts @board.available
 		check_if_win(player_2)
 	end
 
@@ -148,7 +157,6 @@ class Board
 	end
 
 	def update(move, sym)
-		#print move 
 		if @board[move] == @empty_cell
 			@board[move] = sym
 			@available.delete(move) 
