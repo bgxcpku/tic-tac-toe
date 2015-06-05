@@ -69,35 +69,35 @@ class Game
     end
   end
 
-	def turn(player) 
-		if @board.update(player.get_moves, player.sym) #get user's move
-			@current_turn += 1
-			@board.print_board #show user's move
-			check_if_win(player) #check if user win
-		else
-			puts "You can't choose it, please choose again from #{(@board.available).collect {|x| x+1}}"
-		end
-	end
-
-	def smart_computer	
-		move = nil	
-		move = check_if_half_win(@player_2, @player_1) #check if computer has a half_win_pattern
-    if move == nil
-    	move = check_if_half_win(@player_1, @player_2) #if no move, check if player_1 has a half_win_pattern
-    	if move == nil #if neither player has a half_win_pattern, just choose a random available cell
-    		move = @board.available.sample
-    	end
+  def turn(player) 
+    if @board.update(player.get_moves, player.sym) #get user's move
+      @current_turn += 1
+      @board.print_board #show user's move
+      check_if_win(player) #check if user win
+    else
+    puts "You can't choose it, please choose again from #{(@board.available).collect {|x| x+1}}"
     end
-		@board.update(move, player_2.sym)	
-		@player_2.all_moves << move #update player_2's all moves
-		@current_turn += 1
-		puts "Potato is making his next move", "\n"
-		sleep 0.25
-		puts "Potato picks #{move+1}", "\n"
-		sleep 0.25
-		@board.print_board
-		check_if_win(player_2)
-	end
+  end
+
+  def smart_computer	
+    move = nil	
+    move = check_if_half_win(@player_2, @player_1) #check if computer has a half_win_pattern
+    if move == nil
+      move = check_if_half_win(@player_1, @player_2) #if no move, check if player_1 has a half_win_pattern
+      if move == nil #if neither player has a half_win_pattern, just choose a random available cell
+        move = @board.available.sample
+      end
+    end
+    @board.update(move, player_2.sym)	
+    @player_2.all_moves << move #update player_2's all moves
+    @current_turn += 1
+    puts "Potato is making his next move", "\n"
+    sleep 0.25
+    puts "Potato picks #{move+1}", "\n"
+    sleep 0.25
+    @board.print_board
+    check_if_win(player_2)
+  end
 
   def check_if_win(player) #check if player wins
   	@@win_pattern.each do |pattern|
