@@ -2,52 +2,52 @@
 ## It allows either two human or 1 human and 1 computer to play tic tac toe in 3x3 grid
 
 class Game
-	attr_reader :board, :player_1, :player_2
+  attr_reader :board, :player_1, :player_2
  
   @@win_pattern =   # winning pattern combinations
-  	[[0, 1 ,2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
-  	[1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]] 
+  [[0, 1 ,2], [3, 4, 5], [6, 7, 8], [0, 3, 6], 
+   [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]] 
 
   @@half_win_pattern = Array.new # half_win_pattern (either two elements from winning pattern) 
   @@win_pattern.each do |a,b,c|  
-  	@@half_win_pattern << [a, b]
-  	@@half_win_pattern << [a, c]
-  	@@half_win_pattern << [b, c]
+    @@half_win_pattern << [a, b]
+    @@half_win_pattern << [a, c]
+    @@half_win_pattern << [b, c]
   end
 
-	def initialize
-		@board = Board.new #create the grid
-		puts "Tic-Tac-Toe Game"
-		@board.print_board
-		@player_1 = Player.new('x','N') #create player 1 (human)
+  def initialize
+    @board = Board.new #create the grid
+    puts "Tic-Tac-Toe Game"
+    @board.print_board
+    @player_1 = Player.new('x','N') #create player 1 (human)
     puts "What's Player 1's name?"
-		@player_1.get_name
-		puts "Do you want to play with computer? (Y/N)" #user can choose to player with computer (Potato) or another human
-		answer = gets.chomp
-		while answer != 'Y' && answer != 'N'
-			puts "Please choose only Y or N", "\n"
-			answer = gets.chomp
-		end
-		@player_2 = Player.new('o', answer) #create player 2, (human or computer depending on user's choice)
-		if answer == 'N'
-			puts "What's Player 2's name?"
-		end
-		@player_2.get_name
-		@winner = nil
-		@current_turn = 1
-	end
+    @player_1.get_name
+    puts "Do you want to play with computer? (Y/N)" #user can choose to player with computer (Potato) or another human
+    answer = gets.chomp
+    while answer != 'Y' && answer != 'N'
+    	puts "Please choose only Y or N", "\n"
+    	answer = gets.chomp
+    end
+    @player_2 = Player.new('o', answer) #create player 2, (human or computer depending on user's choice)
+    if answer == 'N'
+      puts "What's Player 2's name?"
+    end
+    @player_2.get_name
+    @winner = nil
+    @current_turn = 1
+  end
 
-	def play
+  def play
   	welcome(@player_1)
   	welcome(@player_2)
-    start_playing
-    show_result
-	end
+  	start_playing
+  	show_result
+  end
 
-	def welcome(player) 
-		if player.computer_player == 'N'
-			puts "Welcome to Tic-Tac-Toe, #{player.name}", "\n"
-		else
+  def welcome(player) 
+  	if player.computer_player == 'N'
+  		puts "Welcome to Tic-Tac-Toe, #{player.name}", "\n"
+  	else
 		  sleep 0.25
 			puts "Our smart computer Potato joins the game!", "\n"
 		end
