@@ -122,38 +122,38 @@ class Game
     return move
   end
 
-	def show_result #print results if either has a winner or draw
-		if @winner
-			puts "#{@winner.name} wins"
-		else
-			puts "draw"
-		end
-	end
+  def show_result #print results if either has a winner or draw
+    if @winner
+      puts "#{@winner.name} wins"
+    else
+      puts "draw"
+    end
+  end
 
 end
 
 class Board #creates 3x3 board, user input from 1-9
-	attr_reader :grid, :empty_cell, :available
+  attr_reader :grid, :empty_cell, :available
 
-	def initialize
-		@empty_cell = '-'
-		@grid = Array.new(9, @empty_cell) 
-		@available = Array (0..8)
-	end
+  def initialize
+    @empty_cell = '-'
+    @grid = Array.new(9, @empty_cell) 
+    @available = Array (0..8)
+  end
 
 	def update(move, sym) #update move on the board
-		if @grid[move] == @empty_cell && move >=0 && move <=8 
-			@grid[move] = sym
-			@available.delete(move) 
-			puts move 
-			return true
-		else
-			return false
-		end
-	end
+    if @grid[move] == @empty_cell && move >=0 && move <=8 
+      @grid[move] = sym
+      @available.delete(move) 
+      puts move 
+      return true
+    else
+      return false
+    end
+  end
 
 	def print_board #print board
-		puts "\n"
+    puts "\n"
     @grid.each_slice(3) {|row| puts row.join(' | ')}
     puts "\n"
 	end
@@ -161,30 +161,30 @@ class Board #creates 3x3 board, user input from 1-9
 end
 
 class Player #create players
-	attr_reader :name, :sym, :computer_player, :all_moves
+  attr_reader :name, :sym, :computer_player, :all_moves
 
-	def initialize(sym, computer_player)
-		@name = name
-		@sym = sym #put either 'o' or 'x' in the cell
-		@computer_player = computer_player 
-		@all_moves = Array.new # all_moves collects this player's all moves in order for computer to make move
+  def initialize(sym, computer_player)
+    @name = name
+    @sym = sym #put either 'o' or 'x' in the cell
+    @computer_player = computer_player 
+    @all_moves = Array.new # all_moves collects this player's all moves in order for computer to make move
 	end
 
 	def get_name
-		if @computer_player == 'Y'
-			@name = 'Potato' #give computer a cute name (my pug's name)
-		else
-			@name = gets.chomp
-		end
+    if @computer_player == 'Y'
+      @name = 'Potato' #give computer a cute name (my pug's name)
+    else
+      @name = gets.chomp
+    end
 	end
 
 	def get_moves #to get human player's move 
-		puts "Choose your moves from 1 to 9, #{@name}"
-		move = gets.chomp.to_i - 1
-		if move >= 0 && move <=8
-			all_moves << move #save the move to all moves for this player
-		end
-		return move  
+    puts "Choose your moves from 1 to 9, #{@name}"
+    move = gets.chomp.to_i - 1
+    if move >= 0 && move <=8
+      all_moves << move #save the move to all moves for this player
+    end
+    return move  
 	end
 
 end
