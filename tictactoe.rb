@@ -100,27 +100,27 @@ class Game
   end
 
   def check_if_win(player) #check if player wins
-  	@@win_pattern.each do |pattern|
-  		if pattern.all? {|cell| @board.grid[cell] == player.sym}
-  			@winner = player
-  		end
-  	end
-	end
+    @@win_pattern.each do |pattern|
+      if pattern.all? {|cell| @board.grid[cell] == player.sym}
+        @winner = player
+      end
+    end
+  end
 
   def check_if_half_win(player_a, player_b) #this is used by computer to check if player_a (could be 1 or 2) has winning chance 	
-  	move = nil
-  	@@half_win_pattern.each do |pattern|
-	    if (player_a.all_moves&pattern).length == 2 #if player_a has got two elements in winning patter
-	      @@win_pattern.each do |win_pattern| 
-	      	#and neither player_a nor player_b hasn't taken the third element yet
-	        if (win_pattern - pattern).length == 1 && ((win_pattern - pattern)&player_b.all_moves).empty? && ((win_pattern - pattern)&player_a.all_moves).empty?
-	          move = (win_pattern - pattern)[0] 
-	        end
-	      end
-	    end
+    move = nil
+    @@half_win_pattern.each do |pattern|
+      if (player_a.all_moves&pattern).length == 2 #if player_a has got two elements in winning patter
+        @@win_pattern.each do |win_pattern| 
+        #and neither player_a nor player_b hasn't taken the third element yet
+          if (win_pattern - pattern).length == 1 && ((win_pattern - pattern)&player_b.all_moves).empty? && ((win_pattern - pattern)&player_a.all_moves).empty?
+            move = (win_pattern - pattern)[0] 
+          end
+        end
+      end
     end
     return move
-	end
+  end
 
 	def show_result #print results if either has a winner or draw
 		if @winner
